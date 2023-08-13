@@ -246,7 +246,8 @@ def economic_calendar(
     results = list()
 
     while True:
-        req = requests.post(url, headers=headers, data=data)
+        # add stream = true to make it fast, check: https://github.com/alvarobartt/investpy/issues/517
+        req = requests.post(url, headers=headers, data=data, stream=True)
 
         root = fromstring(req.json()["data"])
         table = root.xpath(".//tr")
